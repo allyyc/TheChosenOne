@@ -26,8 +26,8 @@ backup_data_dir_root: /home/allisoncasasola/TheChosenOne/data  # Your dataset ba
 # lora_ckpt_dir: checkpoint-1200
 max_train_steps: 500
 num_of_generated_img: 15
-dmin_c: 10
-dsize_c: 5       
+dmin_c: 3 # minimum number of elements in a cluster
+dsize_c: 5 # size of the cluster
 infer_steps: 35
 adam_epsilon: 0.000000001
 adam_weight_decay: 0.0001
