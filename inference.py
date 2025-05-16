@@ -31,9 +31,9 @@ pipe.load_lora_weights(
 prompt_postfix = " drinking a beer."
 image_postfix = prompt_postfix.replace(" ", "_")
 
-# create folder
+# create folder if not exists
 output_folder = f"./inference_results/{args.character_name}"
-os.makedirs(output_folder)
+os.makedirs(output_folder, exist_ok=True)
 
 # remember to use the place holader here
 prompt = f"A photo of {args.placeholder_token}{prompt_postfix}."
