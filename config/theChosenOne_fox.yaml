@@ -38,7 +38,7 @@ convergence_scale: 0.8 # 80% in the paper
 
 # inherited from origin, no need to change
 gradient_accumulation_steps: 1
-report_to: tensorboard
+report_to: wandb
 push_to_hub: false
 num_vectors: 1
 enable_xformers_memory_efficient_attention: false
