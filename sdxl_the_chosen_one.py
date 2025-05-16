@@ -863,9 +863,21 @@ def get_text_encoder_lora_state_dict(text_encoder):
     return state_dict
 
 
-def save_model_hook(models, weights, output_dir, accelerator=None):
+def save_model_hook(
+    models,
+    weights,
+    output_dir,
+    accelerator=None,
+    unet=None,
+    text_encoder_one=None,
+    text_encoder_two=None,
+):
     if accelerator is None:
         raise ValueError("accelerator must be provided to save_model_hook")
+    if unet is None or text_encoder_one is None or text_encoder_two is None:
+        raise ValueError(
+            "unet, text_encoder_one, and text_encoder_two must be provided to save_model_hook"
+        )
 
     if accelerator.is_main_process:
         # there are only two options here. Either are just the unet attn processor layers
@@ -1241,7 +1253,13 @@ def train(args, loop=0, loop_num=0):
     # create custom saving & loading hooks so that `accelerator.save_state(...)` serializes in a nice format
     accelerator.register_save_state_pre_hook(
         lambda models, weights, output_dir: save_model_hook(
-            models, weights, output_dir, accelerator
+            models,
+            weights,
+            output_dir,
+            accelerator,
+            unet,
+            text_encoder_one,
+            text_encoder_two,
         )
     )
     accelerator.register_load_state_pre_hook(load_model_hook)
