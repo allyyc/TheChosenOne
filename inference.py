@@ -4,15 +4,17 @@ import argparse
 import yaml
 import os
 
+
 def config_2_args(path):
-    with open(path, 'r') as file:
+    with open(path, "r") as file:
         yaml_data = yaml.safe_load(file)
     parser = argparse.ArgumentParser(description="Generate args from yaml")
     for key, value in yaml_data.items():
-        parser.add_argument(f'--{key}', type=type(value), default=value)
-    
+        parser.add_argument(f"--{key}", type=type(value), default=value)
+
     args = parser.parse_args([])
     return args
+
 
 args = config_2_args("config/theChosenOne_fox.yaml")
 
@@ -20,9 +22,13 @@ loop = 1
 model_path = os.path.join(args.output_dir, args.character_name, str(loop))
 pipe = DiffusionPipeline.from_pretrained(model_path, torch_dtype=torch.float16)
 pipe.to("cuda")
-pipe.load_lora_weights(os.path.join(model_path, f"checkpoint-{args.checkpointing_steps * args.num_train_epochs}"))
+pipe.load_lora_weights(
+    os.path.join(
+        model_path, f"checkpoint-{args.checkpointing_steps * args.num_train_epochs}"
+    )
+)
 
-prompt_postfix = " sitting on a rocket."
+prompt_postfix = " drinking a beer."
 image_postfix = prompt_postfix.replace(" ", "_")
 
 # create folder
