@@ -28,7 +28,7 @@ max_train_steps: 500
 num_of_generated_img: 15
 dmin_c: 3 # minimum number of elements in a cluster
 dsize_c: 5 # size of the cluster
-infer_steps: 35
+infer_steps: 35 
 adam_epsilon: 0.000000001
 adam_weight_decay: 0.0001
 adam_beta1: 0.9
@@ -54,4 +54,4 @@ dataloader_num_workers: 0
 noise_offset: 0
 max_grad_norm: 1.0
 num_validation_images: 4
-validation_epochs: 1
+validation_epochs: 10
