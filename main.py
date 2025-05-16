@@ -133,7 +133,7 @@ def train_loop(args, loop_num: int, vis=True, start_from=0):
         
         # evaluate convergence
         if loop == 0:
-            init_dist = np.mean(cdist(embeddings, embeddings, 'euclidean'))
+            init_dist = np.mean(cdist(embeddings, embeddings, 'euclidean')) # calculates the average distance between all the images
         else:
             pairwise_distances = np.mean(cdist(embeddings, embeddings, 'euclidean'))
             if pairwise_distances < init_dist * args.convergence_scale:
